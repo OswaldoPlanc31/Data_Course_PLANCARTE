@@ -1,1 +1,3 @@
-# Data_Course_PLANCARTEThis README file contains information about my uploaded assignments
+# Data_Course_PLANCARTE
+
+This README file contains information about my uploaded assignments.
