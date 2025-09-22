@@ -1,40 +1,41 @@
-csv_files <- list.files(
-  path = "Data",
-  pattern = "\\.csv$",
-  full.names = TRUE,
-  recursive = FALSE
-)
 
-length(csv_files)
-
-df <- read.csv(file.path("Data", "wingspan_vs_mass.csv"), stringsAsFactors = FALSE)
-
-head(df, 5)
-
-b_files <- list.files(
-  path = "Data",
-  pattern = "^b",
-  full.names = TRUE,
-  recursive = TRUE
-)
-
-for (f in b_files) {
-  if (file.exists(f) && !dir.exists(f)) {
-    cat("\n--- First line of:", f, "---\n")
-    cat(readLines(f, n = 1, warn = FALSE), "\n")
-  }
-}
-
-all_csv_recursive <- list.files(
-  path = "Data",
-  pattern = "\\.csv$",
-  full.names = TRUE,
-  recursive = TRUE
-)
-
-for (f in all_csv_recursive) {
-  if (file.exists(f) && !dir.exists(f)) {
-    cat("\n--- First line of CSV:", f, "---\n")
-    cat(readLines(f, n = 1, warn = FALSE), "\n")
-  }
-}
+1 csv_files <- list.files(
+2   path = "Data",
+3   pattern = "\\.csv$",
+4   full.names = TRUE,
+5   recursive = FALSE
+6 )
+7 
+8 length(csv_files)
+9 
+10 df <- read.csv(file.path("Data", "wingspan_vs_mass.csv"), stringsAsFactors = FALSE)
+11 
+12 head(df, 5)
+13 
+14 b_files <- list.files(
+15   path = "Data",
+16   pattern = "^b",
+17   full.names = TRUE,
+18   recursive = TRUE
+19 )
+20 
+21 for (f in b_files) {
+22   if (file.exists(f) && !dir.exists(f)) {
+23     cat("\n--- First line of:", f, "---\n")
+24     cat(readLines(f, n = 1, warn = FALSE), "\n")
+25   }
+26 }
+27 
+28 all_csv_recursive <- list.files(
+29   path = "Data",
+30   pattern = "\\.csv$",
+31   full.names = TRUE,
+32   recursive = TRUE
+33 )
+34 
+35 for (f in all_csv_recursive) {
+36   if (file.exists(f) && !dir.exists(f)) {
+37     cat("\n--- First line of CSV:", f, "---\n")
+38     cat(readLines(f, n = 1, warn = FALSE), "\n")
+39   }
+40 }
