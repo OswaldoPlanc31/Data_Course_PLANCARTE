@@ -1,0 +1,33 @@
+Tasks:
+1. Create a plaintext document named “final_project_idea.txt”
+
+2. In it, describe your idea for a data analysis final project
+3. Also, Describe the sort of data you will use, potential sources, and what the data might look like
+
+Project Idea
+
+For the final project I would like to analyze gene expression between
+cancerous and healthy human tissue samples. The goal would be to find out
+if specific genes show higher or lower expression in cancer cells comared
+to normal cells. 
+
+I will use publicly available data/datasets from places such as NCBI Gene
+Expression Omnibus. I still have yet to find an exact place. It will contain
+normal expression values for different genes across a "healthy" and "cancer". 
+The structure will have columns for sample id and condition of tissue. Still 
+working on the details.
+
+What I expect the data to look like is to show that some genes have a higher
+than average expression in cancer tissies, and others will have no or lower 
+expression. 
+
+
+4. (If you already have data, skip this task) Create fake data that simulates what your final project data set might look like. Preferrably a csv file
+
+I made a fake dataset located in my Assignment_4 folder
+
+5. Generate a plot (using ggplot) using either your real or fake data that shows at least one expected result
+
+I did this in my assignment 4 folder. The file is called fake data ggplot and 
+I also put a pdf of the ggplot in the assignment 4 folder. Its called 
+fake data ggplot.pdf
