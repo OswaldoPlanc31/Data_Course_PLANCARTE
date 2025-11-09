@@ -1,0 +1,23 @@
+oswal@Oswaldo-PC MINGW64 ~
+#$ mkdir ~/Desktop/Exam1_Practice
+
+oswal@Oswaldo-PC MINGW64 ~
+#$ cd ~/Desktop/Exam1_Practice
+
+oswal@Oswaldo-PC MINGW64 ~/Desktop/Exam1_Practice
+#$ pwd
+#/c/Users/oswal/Desktop/Exam1_Practice
+
+oswal@Oswaldo-PC MINGW64 ~/Desktop/Exam1_Practice
+#$ cp ~/Desktop/Data_Course_PLANCARTE/Data/Fastq_16S/*.fastq ~/Desktop/Exam1_Practice/
+
+oswal@Oswaldo-PC MINGW64 ~/Desktop/Exam1_Practice
+#$ for file in *.fastq
+#> do
+#> cp "$file" "$file.PLANCARTE"
+#> done
+
+oswal@Oswaldo-PC MINGW64 ~/Desktop/Exam1_Practice
+#$ wc -l F3D6_S194_L001_R1_001.fastq.PLANCARTE
+#31956 F3D6_S194_L001_R1_001.fastq.PLANCARTE
+
