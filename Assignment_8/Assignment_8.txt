@@ -1,0 +1,16 @@
+1. Yes, some of my models are meaningless. When I summarized the hypothetica
+situations, the min predicted value -9.4, which is biologically impossible cause 
+you cant have negative growth.
+
+2. Yes. Some of the relationships between the growthrate and predictors are
+curved rather than a perfect straight line. 
+https://www.datacamp.com/tutorial/introduction-to-non-linear-model-and-insights-using-r
+
+3. 
+nonlin <- read_csv("non_linear_relationship.csv")
+nonlin_lm <- lm(response ~ predictor, data = nonlin)
+summary(nonlin_lm)
+
+nonlin <- read_csv("non_linear_relationship.csv")
+nonlin_lm2 <- lm(response ~ predictor + I(predictor^2), data = nonlin)
+summary(nonlin_lm2)
