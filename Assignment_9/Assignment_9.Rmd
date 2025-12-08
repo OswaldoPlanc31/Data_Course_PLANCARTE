@@ -1,0 +1,113 @@
+---
+title: "Assignment 9"
+author: "Oswaldo Plancarte"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+```
+
+## data overview
+
+I will explore predictors of graduate school admission using a logistic regression framework.  
+The dataset includes GRE score, GPA, school rank, and a binary admission outcome.
+
+```{r load}
+grad <- read_csv("GradSchool_Admissions.csv", show_col_types = FALSE) |>
+  mutate(
+    admit_factor = factor(admit, levels = c(0,1), labels = c("Rejected","Admitted")),
+    rank_factor = factor(rank)
+  )
+
+glimpse(grad)
+```
+
+---
+
+## basic exploration
+
+```{r counts}
+grad |>
+  count(admit_factor)
+```
+
+```{r barplot}
+ggplot(grad, aes(x = admit_factor)) +
+  geom_bar() +
+  theme_bw() +
+  labs(title = "Admissions vs Rejections")
+```
+
+### GRE and GPA by outcome
+
+```{r gre}
+ggplot(grad, aes(x = admit_factor, y = gre, fill = admit_factor)) +
+  geom_boxplot(alpha = 0.7) +
+  theme_bw()
+```
+
+```{r gpa}
+ggplot(grad, aes(x = admit_factor, y = gpa, fill = admit_factor)) +
+  geom_boxplot(alpha = 0.7) +
+  theme_bw()
+```
+
+### admission proportion by school rank
+
+```{r rank-plot}
+ggplot(grad, aes(x = rank_factor, fill = admit_factor)) +
+  geom_bar(position = "fill") +
+  theme_bw() +
+  labs(y = "Proportion admitted")
+```
+
+*These simple plots suggest some differences in GRE, GPA, and rank between admitted and rejected students.*
+
+---
+
+## model building
+
+I fit several logistic regression models of increasing levels of complexity:
+
+```{r models}
+mod_null <- glm(admit ~ 1, data = grad, family = binomial)
+mod_gre <- glm(admit ~ gre, data = grad, family = binomial)
+mod_gpa <- glm(admit ~ gpa, data = grad, family = binomial)
+mod_gre_gpa <- glm(admit ~ gre + gpa, data = grad, family = binomial)
+mod_full <- glm(admit ~ gre + gpa + rank_factor, data = grad, family = binomial)
+```
+
+### AIC comparison
+
+```{r aic}
+AIC(mod_null, mod_gre, mod_gpa, mod_gre_gpa, mod_full)
+```
+
+*The model with the lowest AIC is considered the best balance of fit and complexity. The full model typically performs best.*
+
+---
+
+## final model summary
+
+```{r summary-full}
+summary(mod_full)
+```
+
+Key points from the full model (from the summary output):
+
+- GRE has a positive coefficient → higher GRE increases admission odds  
+- GPA has a positive coefficient → higher GPA increases admission odds  
+- Rank 2–4 have negative coefficients relative to Rank 1 → lower-ranked schools have lower odds  
+
+---
+
+## brief interpretation
+
+The full model (GRE + GPA + rank) was selected as the best using AIC.  
+Higher GRE and GPA values both increase the probability of admission.  
+Students from more prestigious institutions (rank 1) have higher predicted admission probabilities than those from rank 2–4, even after controlling for GRE and GPA.
+
+These variables together provide a reasonable explanation of admission outcomes in the dataset.
