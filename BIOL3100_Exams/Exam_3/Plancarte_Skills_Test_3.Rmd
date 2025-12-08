@@ -1,0 +1,122 @@
+---
+title: "Plancarte_Skills_Test_3"
+output: html_document
+date: "2025-12-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+library(broom)
+```
+
+## Exam 3
+
+## 1. load & tidy FacultySalaries_1995.csv and boxplot
+
+```{r faculty-load-tidy-plot}
+faculty_raw <- read_csv("FacultySalaries_1995.csv")
+
+faculty_tidy <- faculty_raw |>
+  select(
+    State, Tier,
+    AvgAssistProfSalary,
+    AvgAssocProfSalary,
+    AvgFullProfSalary
+  ) |>
+  pivot_longer(
+    cols = c(AvgAssistProfSalary, AvgAssocProfSalary, AvgFullProfSalary),
+    names_to = "Rank",
+    values_to = "Salary"
+  ) |>
+  mutate(
+    Rank = recode(
+      Rank,
+      "AvgAssistProfSalary" = "Assist",
+      "AvgAssocProfSalary"  = "Assoc",
+      "AvgFullProfSalary"   = "Full"
+    ),
+    Rank = factor(Rank, levels = c("Assist", "Assoc", "Full")),
+    Tier = factor(Tier, levels = c("I", "IIA", "IIB"))
+  )
+
+ggplot(faculty_tidy,
+       aes(x = Rank, y = Salary, fill = Rank)) +
+  geom_boxplot() +
+  facet_wrap(~ Tier, nrow = 1) +
+  labs(x = "Rank", y = "Salary") +
+  scale_fill_manual(
+    values = c("Assist" = "#F8766D",
+               "Assoc"  = "#00BA38",
+               "Full"   = "#619CFF")
+  ) +
+  theme_bw()
+```
+
+---
+
+## 2. ANOVA model
+
+```{r faculty-anova}
+faculty_aov <- aov(Salary ~ State + Tier + Rank, data = faculty_tidy)
+summary(faculty_aov)
+```
+
+---
+
+## 3. load & tidy Juniper_Oils.csv
+
+```{r juniper-load-tidy}
+juniper_raw <- read_csv("Juniper_Oils.csv")
+
+chem_cols <- c(
+  "alpha-pinene","para-cymene","alpha-terpineol","cedr-9-ene",
+  "alpha-cedrene","beta-cedrene","cis-thujopsene","alpha-himachalene",
+  "beta-chamigrene","cuparene","compound 1","alpha-chamigrene",
+  "widdrol","cedrol","beta-acorenol","alpha-acorenol",
+  "gamma-eudesmol","beta-eudesmol","alpha-eudesmol",
+  "cedr-8-en-13-ol","cedr-8-en-15-ol","compound 2","thujopsenal"
+)
+
+juniper_tidy <- juniper_raw |>
+  select(YearsSinceBurn, all_of(chem_cols)) |>
+  pivot_longer(
+    cols = all_of(chem_cols),
+    names_to = "ChemicalID",
+    values_to = "Concentration"
+  )
+```
+
+---
+
+## 4. faceted plot of chemical concentrations
+
+```{r juniper-plot}
+ggplot(juniper_tidy,
+       aes(x = YearsSinceBurn, y = Concentration)) +
+  geom_point(alpha = 0.3) +
+  geom_smooth(se = TRUE, color = "blue") +
+  facet_wrap(~ ChemicalID, scales = "free_y") +
+  labs(x = "Years Since Burn", y = "Concentration") +
+  theme_minimal()
+```
+
+---
+
+## 5. GLM and broom: significant chemicals
+
+```{r juniper-glm}
+juniper_glm <- glm(
+  Concentration ~ ChemicalID * YearsSinceBurn,
+  data = juniper_tidy
+)
+
+glm_tidy <- tidy(juniper_glm)
+
+sig_terms <- glm_tidy |>
+  filter(p.value < 0.05, term != "(Intercept)")
+
+sig_terms
+```
+
+---
