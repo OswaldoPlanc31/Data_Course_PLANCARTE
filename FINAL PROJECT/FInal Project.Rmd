@@ -1,0 +1,160 @@
+---
+title: "BIOL 3100 Final Project"
+subtitle: "Modeling Tree Growth Through Age–Ring Width Relationships"
+author: "Oswaldo Plancarte"
+output: html_document
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+library(tidyverse)
+```
+
+## Introduction
+
+**The data set used in this project was modeled after tree-ring measurements archived in the International Tree-Ring Data Bank. I adapted the structure of ITRDB data sets and generated a simple version for the purpose of this project.**
+
+Tree rings provide a natural archive of the past growth conditions of trees. Each year trees produce a new ring, and the width of that ring tells a story of the environmental factors like temperature, water availability, and species growth strategies. 
+
+In this project, I examined a data set representing annual ring-width growth from **Douglas-fir**, **Ponderosa pine**, and **White oak** trees. Each tree has a unique species coded ID, for example (*DF1, PP3, WO2*), and each row in the data set represents:
+
+- the species of the tree
+- the individual tree identity
+- the age (in years since germination)
+- the ring width for that year (in millimeters)
+
+My goal is to visualize how certain growth patterns differ across different species and explore modeling approaches to describe these patterns.
+
+---
+
+## Loading the Dataset
+
+```{r load-data}
+# load the tree ring data
+tree_data <- read_csv("tree_ring_data.csv")
+
+# glimpse at the structure
+glimpse(tree_data)
+```
+
+---
+
+## Dataset Description
+
+The data set used has approximately 300 rows. 
+
+Variables include:
+
+- **species** – Douglas-fir, Ponderosa pine, or White oak  
+- **tree_id** – species-coded individual ID (e.g., DF1, PP2, WO3)  
+- **age** – tree age in years  
+- **ring_width** – annual growth ring width in millimeters
+
+---
+
+## Modeling Tree Growth
+
+To better understand the correlation between growth and age, I fitted some simple models to the data.
+For each species I compared the following: 
+
+- a **linear** model (constant rate of growth change)
+- a **quadratic** model (allows for curved growth patterns)
+
+These models help determine whether growth speeds up, slows down, or stays the same as trees age. 
+
+
+```{r fit-models}
+# split data by species
+species_list <- split(tree_data, tree_data$species)
+
+# fit linear and quadratic models for each species
+model_results <- lapply(species_list, function(df) {
+  linear_mod <- lm(ring_width ~ age, data = df)
+  quad_mod   <- lm(ring_width ~ poly(age, 2), data = df)
+  
+  tibble(
+    species = unique(df$species),
+    linear_AIC = AIC(linear_mod),
+    quad_AIC = AIC(quad_mod)
+  )
+})
+
+model_summary <- bind_rows(model_results)
+model_summary
+```
+
+### Model Comparison
+
+Lower AIC values mean a better-fitting model. This table shows which model performs better for each species.
+
+```{r model-comparison}
+model_summary |> 
+  mutate(better_model = if_else(quad_AIC < linear_AIC, "Quadratic", "Linear"))
+```
+
+### Visualization of Models
+
+Below is a visualization combining:
+
+- ring-width data  
+- linear model 
+- quadratic model  
+
+```{r model-plot}
+tree_data |> 
+  ggplot(aes(x = age, y = ring_width, color = tree_id)) +
+  geom_point(alpha = 0.4) +
+  geom_smooth(method = "lm", se = FALSE, color = "black") +
+  geom_smooth(method = "lm", formula = y ~ poly(x, 2), se = FALSE, color = "red") +
+  facet_wrap(~ species, scales = "free_y") +
+  labs(
+    title = "Linear (black) vs Quadratic (red) Growth Models",
+    x = "Age (years)",
+    y = "Ring Width (mm)"
+  ) +
+  theme_bw()
+```
+---
+## Results
+
+### Growth Patterns Across the Different Species
+
+
+The three species in the data set showed different age-growth relationships.
+
+**Douglass-fir** and **White oak** both showed a clear **decline** in ring width as the tree aged. Trees that are younger produced wider rings, and the trees that are older produced narrower rings. This pattern is very common in many tree species where early rapid growth slows down as the tree matures.
+
+In contrast, **Ponderosa pine** showed the exact opposite of the previous trend. Ring width *increased* with age. Instead of early fast growth, followed by decline, this data suggests that Ponderosa pine grew slower in early years and then accelerated over time. While this is not very typical like declining growth is, this pattern can happen sometimes in trees that experience competition early in their lives for shade, followed by release later in life.
+
+### Model Performance
+
+To better describe these patterns, I fitted both linear and quadratic models for each species.  
+The quadratic model allows for curvature in the relationship between age and ring width.
+
+```{r show-comparison-again, echo=FALSE}
+model_summary |> 
+  mutate(better_model = if_else(quad_AIC < linear_AIC, "Quadratic", "Linear"))
+```
+
+Across all three species, the **quadratic model had lower AIC values** than the linear model, meaning a better fit.  
+This means that growth patterns are not well represented by a straight line and that curvature—whether increasing or decreasing—is an important part of the growth process.
+
+- For Douglas-fir and White oak, the quadratic model captures the rapid early growth followed by steady decline.  
+- For Ponderosa pine, the quadratic model captures the upward curvature as ring width increases with age.
+
+Together, these results show that tree growth is nonlinear and species differ in both the direction and shape of their growth curves.
+
+---
+
+## Discussion & Conclusion
+
+This project dove into the growth patterns in three tree species by analyzing how annual ring width changes with age. Even with a pretty small data set, the species showed notable different growth patterns, showing the different ways that trees allocate their energy over their lifetimes. 
+
+**Douglas-fir** and **White oak** both showed what was expected. A pattern of declining ring width with age. A lot of tree species grow fast when they are young, making wide rings during their early years, and then slow down as they mature. The quadratic model fit for these species supports this. The model captures the curvature correlated with fast growth when young and then followed by a gradual decrease. 
+
+**Ponderosa pine** showed the opposite pattern. Ring width actually increased with age. In actual forests this can happen when young trees grow under heavy shade or a lot of competition early on. These trees then experience a release event like increased sunlight allowing for fast radial growth later.
+
+Across all the species that were looked at, the **quadratic model** gave a better fit than the linear model. This makes sense because in real life (biologically) tree growth doesn't really change at a constant rate. Instead, growth speeds up and slows down over time; nonlinear models are better to capture these types of shapes. 
+
+---

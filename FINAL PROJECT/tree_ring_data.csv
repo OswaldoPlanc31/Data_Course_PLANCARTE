@@ -1,0 +1,173 @@
+species,tree_id,age,ring_width
+Douglas-fir,DF1,1,2.51
+Douglas-fir,DF1,2,2.42
+Douglas-fir,DF1,3,2.38
+Douglas-fir,DF1,4,2.19
+Douglas-fir,DF1,5,2.08
+Douglas-fir,DF1,6,1.98
+Douglas-fir,DF1,7,1.89
+Douglas-fir,DF1,8,1.78
+Douglas-fir,DF1,9,1.65
+Douglas-fir,DF1,10,1.58
+Douglas-fir,DF1,11,1.47
+Douglas-fir,DF1,12,1.41
+Douglas-fir,DF1,13,1.36
+Douglas-fir,DF1,14,1.29
+Douglas-fir,DF1,15,1.22
+Douglas-fir,DF2,1,2.47
+Douglas-fir,DF2,2,2.37
+Douglas-fir,DF2,3,2.32
+Douglas-fir,DF2,4,2.21
+Douglas-fir,DF2,5,2.11
+Douglas-fir,DF2,6,1.99
+Douglas-fir,DF2,7,1.87
+Douglas-fir,DF2,8,1.79
+Douglas-fir,DF2,9,1.71
+Douglas-fir,DF2,10,1.61
+Douglas-fir,DF2,11,1.53
+Douglas-fir,DF2,12,1.45
+Douglas-fir,DF2,13,1.37
+Douglas-fir,DF2,14,1.30
+Douglas-fir,DF2,15,1.23
+Douglas-fir,DF3,1,2.62
+Douglas-fir,DF3,2,2.54
+Douglas-fir,DF3,3,2.40
+Douglas-fir,DF3,4,2.30
+Douglas-fir,DF3,5,2.19
+Douglas-fir,DF3,6,2.07
+Douglas-fir,DF3,7,1.96
+Douglas-fir,DF3,8,1.84
+Douglas-fir,DF3,9,1.75
+Douglas-fir,DF3,10,1.66
+Douglas-fir,DF3,11,1.57
+Douglas-fir,DF3,12,1.49
+Douglas-fir,DF3,13,1.40
+Douglas-fir,DF3,14,1.33
+Douglas-fir,DF3,15,1.26
+Douglas-fir,DF4,1,2.55
+Douglas-fir,DF4,2,2.48
+Douglas-fir,DF4,3,2.36
+Douglas-fir,DF4,4,2.25
+Douglas-fir,DF4,5,2.16
+Douglas-fir,DF4,6,2.02
+Douglas-fir,DF4,7,1.92
+Douglas-fir,DF4,8,1.83
+Douglas-fir,DF4,9,1.72
+Douglas-fir,DF4,10,1.63
+Douglas-fir,DF4,11,1.54
+Douglas-fir,DF4,12,1.46
+Douglas-fir,DF4,13,1.38
+Douglas-fir,DF4,14,1.32
+Douglas-fir,DF4,15,1.25
+Douglas-fir,DF5,1,2.59
+Douglas-fir,DF5,2,2.50
+Douglas-fir,DF5,3,2.39
+Douglas-fir,DF5,4,2.28
+Douglas-fir,DF5,5,2.19
+Douglas-fir,DF5,6,2.08
+Douglas-fir,DF5,7,1.97
+Douglas-fir,DF5,8,1.86
+Douglas-fir,DF5,9,1.76
+Douglas-fir,DF5,10,1.66
+Douglas-fir,DF5,11,1.57
+Douglas-fir,DF5,12,1.48
+Douglas-fir,DF5,13,1.40
+Douglas-fir,DF5,14,1.33
+Douglas-fir,DF5,15,1.26
+
+Ponderosa pine,PP1,1,1.95
+Ponderosa pine,PP1,2,2.12
+Ponderosa pine,PP1,3,2.30
+Ponderosa pine,PP1,4,2.55
+Ponderosa pine,PP1,5,2.80
+Ponderosa pine,PP1,6,3.00
+Ponderosa pine,PP1,7,3.18
+Ponderosa pine,PP1,8,3.32
+Ponderosa pine,PP1,9,3.40
+Ponderosa pine,PP1,10,3.50
+Ponderosa pine,PP2,1,1.88
+Ponderosa pine,PP2,2,2.07
+Ponderosa pine,PP2,3,2.26
+Ponderosa pine,PP2,4,2.47
+Ponderosa pine,PP2,5,2.71
+Ponderosa pine,PP2,6,2.89
+Ponderosa pine,PP2,7,3.10
+Ponderosa pine,PP2,8,3.25
+Ponderosa pine,PP2,9,3.34
+Ponderosa pine,PP2,10,3.43
+Ponderosa pine,PP3,1,1.92
+Ponderosa pine,PP3,2,2.14
+Ponderosa pine,PP3,3,2.33
+Ponderosa pine,PP3,4,2.57
+Ponderosa pine,PP3,5,2.76
+Ponderosa pine,PP3,6,2.97
+Ponderosa pine,PP3,7,3.16
+Ponderosa pine,PP3,8,3.30
+Ponderosa pine,PP3,9,3.40
+Ponderosa pine,PP3,10,3.48
+Ponderosa pine,PP4,1,1.90
+Ponderosa pine,PP4,2,2.11
+Ponderosa pine,PP4,3,2.29
+Ponderosa pine,PP4,4,2.51
+Ponderosa pine,PP4,5,2.72
+Ponderosa pine,PP4,6,2.93
+Ponderosa pine,PP4,7,3.11
+Ponderosa pine,PP4,8,3.26
+Ponderosa pine,PP4,9,3.37
+Ponderosa pine,PP4,10,3.46
+Ponderosa pine,PP5,1,1.93
+Ponderosa pine,PP5,2,2.13
+Ponderosa pine,PP5,3,2.35
+Ponderosa pine,PP5,4,2.56
+Ponderosa pine,PP5,5,2.78
+Ponderosa pine,PP5,6,2.98
+Ponderosa pine,PP5,7,3.15
+Ponderosa pine,PP5,8,3.28
+Ponderosa pine,PP5,9,3.37
+Ponderosa pine,PP5,10,3.47
+
+White oak,WO1,1,1.22
+White oak,WO1,2,1.18
+White oak,WO1,3,1.15
+White oak,WO1,4,1.11
+White oak,WO1,5,1.07
+White oak,WO1,6,1.03
+White oak,WO1,7,0.98
+White oak,WO1,8,0.94
+White oak,WO1,9,0.90
+White oak,WO1,10,0.87
+White oak,WO1,11,0.83
+White oak,WO1,12,0.80
+White oak,WO1,13,0.77
+White oak,WO1,14,0.74
+White oak,WO1,15,0.70
+White oak,WO2,1,1.20
+White oak,WO2,2,1.16
+White oak,WO2,3,1.13
+White oak,WO2,4,1.09
+White oak,WO2,5,1.05
+White oak,WO2,6,1.01
+White oak,WO2,7,0.97
+White oak,WO2,8,0.93
+White oak,WO2,9,0.89
+White oak,WO2,10,0.85
+White oak,WO2,11,0.82
+White oak,WO2,12,0.78
+White oak,WO2,13,0.75
+White oak,WO2,14,0.72
+White oak,WO2,15,0.69
+White oak,WO3,1,1.18
+White oak,WO3,2,1.14
+White oak,WO3,3,1.11
+White oak,WO3,4,1.08
+White oak,WO3,5,1.04
+White oak,WO3,6,1.00
+White oak,WO3,7,0.96
+White oak,WO3,8,0.92
+White oak,WO3,9,0.88
+White oak,WO3,10,0.85
+White oak,WO3,11,0.81
+White oak,WO3,12,0.78
+White oak,WO3,13,0.74
+White oak,WO3,14,0.71
+White oak,WO3,15,0.68
